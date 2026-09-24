@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 202" width="1040" height="202">
 <style>text{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif}</style>
-<text x="0" y="16" fill="#c9d1d9" font-size="14" font-weight="600">5 contributions in 2026</text>
+<text x="0" y="16" fill="#c9d1d9" font-size="14" font-weight="600">18 contributions in 2026</text>
 <text x="48" y="37" fill="#8b949e" font-size="11">Jan</text>
 <text x="138" y="37" fill="#8b949e" font-size="11">Feb</text>
 <text x="210" y="37" fill="#8b949e" font-size="11">Mar</text>
@@ -96,7 +96,7 @@
 <rect x="246" y="118" width="14" height="14" rx="3" fill="#161018"><title>2026-03-19 · level 0</title></rect>
 <rect x="246" y="136" width="14" height="14" rx="3" fill="#161018"><title>2026-03-20 · level 0</title></rect>
 <rect x="246" y="154" width="14" height="14" rx="3" fill="#161018"><title>2026-03-21 · level 0</title></rect>
-<rect x="264" y="46" width="14" height="14" rx="3" fill="#43131d"><title>2026-03-22 · level 1</title></rect>
+<rect x="264" y="46" width="14" height="14" rx="3" fill="#ff3b5c"><title>2026-03-22 · level 4</title></rect>
 <rect x="264" y="64" width="14" height="14" rx="3" fill="#161018"><title>2026-03-23 · level 0</title></rect>
 <rect x="264" y="82" width="14" height="14" rx="3" fill="#161018"><title>2026-03-24 · level 0</title></rect>
 <rect x="264" y="100" width="14" height="14" rx="3" fill="#161018"><title>2026-03-25 · level 0</title></rect>
