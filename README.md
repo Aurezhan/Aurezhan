@@ -1,24 +1,7 @@
 <div align="center">
 
-<img src="./assets/banner-v3.svg" width="100%" alt="HELLO WORLD I'M HAN!" />
+# HELLO WORLD
 
-</div>
-
-<div align="center">
-
-![C#](https://img.shields.io/badge/C%23-111318?style=for-the-badge&logo=csharp&logoColor=E66A78)
-![Unity](https://img.shields.io/badge/Unity-111318?style=for-the-badge&logo=unity&logoColor=E66A78)
-![Lua](https://img.shields.io/badge/Lua-111318?style=for-the-badge&logo=lua&logoColor=E66A78)
-![.NET](https://img.shields.io/badge/.NET-111318?style=for-the-badge&logo=dotnet&logoColor=E66A78)
-![MySQL](https://img.shields.io/badge/MySQL-111318?style=for-the-badge&logo=mysql&logoColor=E66A78)
-![Redis](https://img.shields.io/badge/Redis-111318?style=for-the-badge&logo=redis&logoColor=E66A78)
-
-</div>
-
-<br/>
-
-<div align="center">
-
-<img src="https://raw.githubusercontent.com/Aurezhan/Aurezhan/main/assets/contribution-heatmap.svg" width="100%" alt="Aurezhan contribution heatmap" />
+<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=800&size=42&duration=1800&pause=700&color=FF3B5C&center=true&vCenter=true&width=500&height=70&lines=I%27M+HAN%21" alt="I'm Han animated" />
 
 </div>
