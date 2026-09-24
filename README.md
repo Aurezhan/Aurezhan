@@ -1,3 +1,3 @@
 <p>
-  <img src="./assets/greeting.svg" height="34" alt="Hello World, I'm Han!" /><img src="./assets/chillet.svg" height="34" alt="Chillet" />
+  <img src="./assets/greeting.svg" height="34" alt="Hello World, I'm Han!" /><img src="./assets/chillet-approved.svg" height="34" alt="Chillet" />
 </p>
