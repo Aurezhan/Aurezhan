@@ -1,0 +1,36 @@
+name: Generate contribution heatmap
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 0 * * *"
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "assets/contribution-heatmap.svg"
+
+permissions:
+  contents: write
+
+jobs:
+  heatmap:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Generate heatmap
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/generate_heatmap.py
+
+      - name: Commit generated SVG
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/contribution-heatmap.svg
+          git diff --cached --quiet && exit 0
+          git commit -m "chore(profile): cập nhật contribution heatmap"
+          git push
