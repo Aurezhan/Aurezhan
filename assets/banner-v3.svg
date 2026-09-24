@@ -1,0 +1,136 @@
+<svg width="1400" height="480" viewBox="0 0 1400 480" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#0d0914"/>
+    <stop offset="28%" stop-color="#2c1024"/>
+    <stop offset="58%" stop-color="#6e1d35"/>
+    <stop offset="82%" stop-color="#b63445"/>
+    <stop offset="100%" stop-color="#db584f"/>
+  </linearGradient>
+  <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#76203a"/>
+    <stop offset="38%" stop-color="#42152b"/>
+    <stop offset="100%" stop-color="#090b11"/>
+  </linearGradient>
+  <radialGradient id="sunGlow">
+    <stop offset="0%" stop-color="#ff665f" stop-opacity="0.85"/>
+    <stop offset="45%" stop-color="#ff4657" stop-opacity="0.28"/>
+    <stop offset="100%" stop-color="#ff3049" stop-opacity="0"/>
+  </radialGradient>
+  <filter id="blur"><feGaussianBlur stdDeviation="20"/></filter>
+</defs>
+
+<rect width="1400" height="480" rx="14" fill="url(#sky)"/>
+
+<!-- star haze -->
+<g fill="#ff8c87" opacity=".32">
+  <rect x="170" y="48" width="3" height="3"/><rect x="228" y="67" width="2" height="2"/>
+  <rect x="382" y="39" width="3" height="3"/><rect x="654" y="53" width="2" height="2"/>
+  <rect x="802" y="32" width="3" height="3"/><rect x="1072" y="64" width="2" height="2"/>
+  <rect x="1188" y="42" width="3" height="3"/>
+</g>
+
+<!-- pixel clouds -->
+<g fill="#7d273d" opacity=".75">
+  <path d="M80 92h88v-8h58v8h60v9H80z"/>
+  <path d="M340 78h68v-7h94v7h72v9H340z"/>
+  <path d="M890 84h60v-8h90v8h72v9H890z"/>
+  <path d="M1110 112h45v-7h78v7h62v8h-185z"/>
+</g>
+<g fill="#c84750" opacity=".38">
+  <path d="M135 120h110v8H135z"/><path d="M462 108h136v7H462z"/>
+  <path d="M935 120h130v7H935z"/>
+</g>
+
+<!-- sun -->
+<circle cx="1025" cy="220" r="118" fill="url(#sunGlow)" filter="url(#blur)"/>
+<circle cx="1025" cy="220" r="73" fill="#ff4d5a"/>
+
+<!-- distant mountains -->
+<path d="M0 296L150 192l112 80 165-124 145 142 180-128 146 128 178-116 160 116 164-112v302H0z" fill="#27152b"/>
+<path d="M0 319l170-83 140 71 176-111 156 112 170-93 170 103 159-83 259 88v157H0z" fill="#1b1324"/>
+
+<!-- ridge highlights -->
+<g fill="#55203a" opacity=".75">
+  <path d="M427 148l42 47-28-12-20 19-21-12z"/>
+  <path d="M752 162l38 43-27-11-18 18-20-11z"/>
+  <path d="M1076 174l37 39-25-9-19 17-19-10z"/>
+</g>
+
+<!-- far forest -->
+<g fill="#11101b">
+  <path d="M0 324c135-30 244-11 355 10 118 22 227-9 350-7 141 3 231 30 355 2 110-25 230-24 340-4v155H0z"/>
+</g>
+
+<!-- water -->
+<path d="M0 342c190-16 331 18 512 4 182-14 328 14 501 0 152-13 253 0 387-8v142H0z" fill="url(#water)"/>
+
+<!-- reflected sun -->
+<g stroke-linecap="square">
+  <path d="M875 345h285" stroke="#ff4e5f" stroke-width="7" opacity=".76"/>
+  <path d="M909 361h220" stroke="#f34258" stroke-width="6" opacity=".62"/>
+  <path d="M943 377h155" stroke="#d62f4a" stroke-width="5" opacity=".52"/>
+  <path d="M974 392h100" stroke="#aa2540" stroke-width="4" opacity=".46"/>
+</g>
+
+<!-- islands -->
+<path d="M705 370c49-30 111-31 166 0-47 14-117 15-166 0z" fill="#0b0c13"/>
+<g fill="#080a10">
+  <path d="M742 370l14-48 14 48h-9l16 20h-42l16-20z"/>
+  <path d="M792 370l16-55 16 55h-10l18 21h-48l18-21z"/>
+  <path d="M836 372l12-40 12 40h-8l14 18h-36l14-18z"/>
+</g>
+
+<!-- giant left tree -->
+<g fill="#07090e">
+  <rect x="78" y="120" width="20" height="240"/>
+  <path d="M86 132c-44 18-69 49-86 80 39-18 72-20 103-14-30-22-32-44-17-66z"/>
+  <path d="M97 157c56 8 95 34 128 66-46-10-86-5-122 10 25-27 28-52-6-76z"/>
+  <path d="M83 195c-49 28-71 61-82 92 39-20 75-24 108-17-31-22-39-43-26-75z"/>
+</g>
+
+<!-- left pine forest -->
+<g fill="#090b12">
+  <path d="M110 350l33-109 33 109h-19l28 34h-84l28-34z"/>
+  <path d="M183 358l29-95 29 95h-17l26 31h-76l25-31z"/>
+  <path d="M246 361l25-82 25 82h-14l22 27h-66l22-27z"/>
+</g>
+
+<!-- right pine forest -->
+<g fill="#090b12">
+  <path d="M1170 352l37-123 37 123h-21l31 37h-94l31-37z"/>
+  <path d="M1240 360l30-98 30 98h-17l25 30h-77l26-30z"/>
+  <path d="M1310 365l25-81 25 81h-15l21 25h-63l21-25z"/>
+</g>
+
+<!-- torii silhouette -->
+<g fill="#08090f">
+  <rect x="1120" y="250" width="14" height="104"/>
+  <rect x="1196" y="250" width="14" height="104"/>
+  <rect x="1100" y="245" width="130" height="12"/>
+  <rect x="1110" y="264" width="110" height="9"/>
+  <path d="M1094 245l28-13h86l28 13z"/>
+</g>
+
+<!-- samurai / traveler silhouette -->
+<g fill="#08090f">
+  <path d="M365 333c19-35 38-58 60-73 27 6 46 27 51 57l-6 71H342z"/>
+  <circle cx="427" cy="233" r="20"/>
+  <path d="M397 224c17-19 43-24 65-6-19-2-36 3-49 16z"/>
+  <path d="M441 247l42 69-13 8-45-66z"/>
+  <path d="M407 247l-20 76-13-4 18-78z"/>
+  <path d="M377 318l-75 31-5-10 74-35z"/>
+  <path d="M303 345l-27 5 21-18z"/>
+</g>
+
+<!-- foreground -->
+<path d="M0 408c120-18 225 12 332 4 144-12 255 28 391 3 127-24 245 13 363-4 118-17 211-8 314 3v66H0z" fill="#06080d"/>
+
+<!-- text shadow -->
+<text x="700" y="182" text-anchor="middle" font-family="monospace" font-weight="900" font-size="58" letter-spacing="7" fill="#000" opacity=".42">HELLO WORLD</text>
+<text x="700" y="252" text-anchor="middle" font-family="monospace" font-weight="900" font-size="52" letter-spacing="8" fill="#000" opacity=".42">I'M HAN!</text>
+
+<!-- title -->
+<text x="700" y="176" text-anchor="middle" font-family="monospace" font-weight="900" font-size="58" letter-spacing="7" fill="#f7f2ee">HELLO WORLD</text>
+<text x="700" y="246" text-anchor="middle" font-family="monospace" font-weight="900" font-size="52" letter-spacing="8" fill="#ff4963">I'M HAN!</text>
+</svg>
