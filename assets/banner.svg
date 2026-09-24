@@ -1,0 +1,50 @@
+<svg width="1200" height="360" viewBox="0 0 1200 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#241634"/>
+      <stop offset="48%" stop-color="#7A263E"/>
+      <stop offset="100%" stop-color="#F06A4F"/>
+    </linearGradient>
+    <linearGradient id="lake" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5E263F"/>
+      <stop offset="100%" stop-color="#161827"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="360" rx="14" fill="url(#sky)"/>
+
+  <!-- sun -->
+  <circle cx="860" cy="145" r="54" fill="#FFD08A" opacity="0.95" filter="url(#glow)"/>
+
+  <!-- distant mountains -->
+  <path d="M0 220 L150 115 L250 205 L390 92 L540 215 L690 135 L810 220 L980 115 L1200 225 L1200 360 L0 360 Z" fill="#34203D" opacity="0.82"/>
+  <path d="M0 250 L175 170 L315 240 L455 155 L610 242 L760 182 L915 245 L1065 168 L1200 235 L1200 360 L0 360 Z" fill="#211A32" opacity="0.93"/>
+
+  <!-- lake -->
+  <path d="M0 250 C170 238 310 268 465 250 C630 230 770 265 930 246 C1040 232 1125 242 1200 250 L1200 360 L0 360 Z" fill="url(#lake)"/>
+  <path d="M645 277 C760 269 900 272 1040 262" stroke="#F47E67" stroke-width="5" stroke-linecap="round" opacity="0.65"/>
+  <path d="M695 296 C785 289 900 291 990 285" stroke="#F47E67" stroke-width="3" stroke-linecap="round" opacity="0.45"/>
+
+  <!-- pine silhouettes -->
+  <g fill="#10121D">
+    <path d="M65 270 L102 158 L139 270 H116 L145 302 H59 L88 270 Z"/>
+    <path d="M138 285 L170 190 L202 285 H183 L209 312 H131 L157 285 Z"/>
+    <path d="M1040 275 L1078 150 L1116 275 H1092 L1122 310 H1034 L1064 275 Z"/>
+    <path d="M1120 290 L1150 195 L1180 290 H1162 L1190 318 H1110 L1138 290 Z"/>
+  </g>
+
+  <!-- foreground -->
+  <path d="M0 315 C150 288 300 334 430 310 C590 282 700 337 860 312 C1015 288 1105 298 1200 305 L1200 360 L0 360 Z" fill="#0A0C12"/>
+
+  <!-- title -->
+  <g text-anchor="middle" font-family="'Courier New', monospace" font-weight="700">
+    <text x="600" y="130" font-size="48" fill="#FFF5EC" letter-spacing="5">HELLO WORLD</text>
+    <text x="600" y="194" font-size="44" fill="#FFB199" letter-spacing="6">I'M HAN!</text>
+  </g>
+
+  <text x="600" y="334" text-anchor="middle" font-family="'Courier New', monospace" font-size="14" fill="#C6B7C9" letter-spacing="4">GAME SYSTEMS • BACKEND • UNITY • C# • LUA</text>
+</svg>
