@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./assets/banner-v2.svg" width="100%" alt="HELLO WORLD I'M HAN!" />
+<img src="./assets/banner-v3.svg" width="100%" alt="HELLO WORLD I'M HAN!" />
 
 </div>
 
