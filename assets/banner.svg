@@ -1,50 +1,114 @@
-<svg width="1200" height="360" viewBox="0 0 1200 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="1200" height="360" viewBox="0 0 1200 360" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#241634"/>
-      <stop offset="48%" stop-color="#7A263E"/>
-      <stop offset="100%" stop-color="#F06A4F"/>
+      <stop offset="0%" stop-color="#2a1734"/>
+      <stop offset="38%" stop-color="#5f2742"/>
+      <stop offset="72%" stop-color="#b44d4f"/>
+      <stop offset="100%" stop-color="#ef7a57"/>
     </linearGradient>
-    <linearGradient id="lake" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#5E263F"/>
-      <stop offset="100%" stop-color="#161827"/>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6b2945"/>
+      <stop offset="45%" stop-color="#46233a"/>
+      <stop offset="100%" stop-color="#161522"/>
     </linearGradient>
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="10" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    <radialGradient id="sunGlow">
+      <stop offset="0%" stop-color="#ffe0a2" stop-opacity="0.95"/>
+      <stop offset="55%" stop-color="#ffb36f" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#ff8b63" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="12"/>
     </filter>
   </defs>
 
   <rect width="1200" height="360" rx="14" fill="url(#sky)"/>
 
-  <!-- sun -->
-  <circle cx="860" cy="145" r="54" fill="#FFD08A" opacity="0.95" filter="url(#glow)"/>
-
-  <!-- distant mountains -->
-  <path d="M0 220 L150 115 L250 205 L390 92 L540 215 L690 135 L810 220 L980 115 L1200 225 L1200 360 L0 360 Z" fill="#34203D" opacity="0.82"/>
-  <path d="M0 250 L175 170 L315 240 L455 155 L610 242 L760 182 L915 245 L1065 168 L1200 235 L1200 360 L0 360 Z" fill="#211A32" opacity="0.93"/>
-
-  <!-- lake -->
-  <path d="M0 250 C170 238 310 268 465 250 C630 230 770 265 930 246 C1040 232 1125 242 1200 250 L1200 360 L0 360 Z" fill="url(#lake)"/>
-  <path d="M645 277 C760 269 900 272 1040 262" stroke="#F47E67" stroke-width="5" stroke-linecap="round" opacity="0.65"/>
-  <path d="M695 296 C785 289 900 291 990 285" stroke="#F47E67" stroke-width="3" stroke-linecap="round" opacity="0.45"/>
-
-  <!-- pine silhouettes -->
-  <g fill="#10121D">
-    <path d="M65 270 L102 158 L139 270 H116 L145 302 H59 L88 270 Z"/>
-    <path d="M138 285 L170 190 L202 285 H183 L209 312 H131 L157 285 Z"/>
-    <path d="M1040 275 L1078 150 L1116 275 H1092 L1122 310 H1034 L1064 275 Z"/>
-    <path d="M1120 290 L1150 195 L1180 290 H1162 L1190 318 H1110 L1138 290 Z"/>
+  <!-- pixel clouds -->
+  <g opacity="0.55" fill="#d86863">
+    <rect x="80" y="64" width="54" height="8"/><rect x="126" y="56" width="64" height="8"/><rect x="182" y="64" width="44" height="8"/>
+    <rect x="310" y="78" width="42" height="7"/><rect x="348" y="70" width="70" height="7"/><rect x="412" y="78" width="48" height="7"/>
+    <rect x="900" y="60" width="42" height="7"/><rect x="936" y="52" width="74" height="7"/><rect x="1004" y="60" width="50" height="7"/>
   </g>
 
-  <!-- foreground -->
-  <path d="M0 315 C150 288 300 334 430 310 C590 282 700 337 860 312 C1015 288 1105 298 1200 305 L1200 360 L0 360 Z" fill="#0A0C12"/>
+  <!-- sun + glow -->
+  <circle cx="870" cy="145" r="92" fill="url(#sunGlow)" filter="url(#softGlow)"/>
+  <circle cx="870" cy="145" r="48" fill="#ffd18a"/>
+
+  <!-- far mountain layers -->
+  <path d="M0 215 L120 120 L225 205 L370 100 L525 220 L670 128 L810 220 L980 112 L1200 220 L1200 360 L0 360 Z" fill="#45223e"/>
+  <path d="M0 238 L155 160 L275 225 L420 142 L575 232 L730 162 L900 232 L1055 152 L1200 228 L1200 360 L0 360 Z" fill="#321d36"/>
+
+  <!-- snow / ridge details -->
+  <g fill="#6a3551" opacity="0.8">
+    <path d="M120 120 L146 145 L126 141 L113 155 L98 150 Z"/>
+    <path d="M370 100 L402 136 L380 129 L360 144 L340 136 Z"/>
+    <path d="M670 128 L700 156 L678 150 L660 165 L643 156 Z"/>
+    <path d="M980 112 L1012 146 L988 139 L968 154 L950 145 Z"/>
+  </g>
+
+  <!-- midground forest -->
+  <g fill="#171526" opacity="0.96">
+    <path d="M0 245 C110 226 215 235 320 248 C430 262 520 235 630 242 C740 248 835 265 955 245 C1060 228 1130 232 1200 240 L1200 360 L0 360 Z"/>
+  </g>
+
+  <!-- lake -->
+  <path d="M0 255 C120 245 230 267 345 258 C470 248 590 264 710 255 C835 245 958 262 1200 248 L1200 360 L0 360 Z" fill="url(#water)"/>
+
+  <!-- water reflections -->
+  <g stroke-linecap="square">
+    <path d="M730 270 H1015" stroke="#ef795e" stroke-width="5" opacity="0.75"/>
+    <path d="M780 283 H970" stroke="#e96d5b" stroke-width="4" opacity="0.62"/>
+    <path d="M820 295 H935" stroke="#d75b56" stroke-width="3" opacity="0.5"/>
+    <path d="M120 286 H315" stroke="#7a334d" stroke-width="3" opacity="0.4"/>
+  </g>
+
+  <!-- islands -->
+  <path d="M705 302 C750 280 805 284 845 303 C808 310 748 312 705 302 Z" fill="#151522"/>
+  <g fill="#10131d">
+    <path d="M742 300 L752 268 L762 300 H755 L768 309 H735 L748 300 Z"/>
+    <path d="M790 300 L800 264 L810 300 H803 L816 309 H783 L796 300 Z"/>
+    <path d="M824 301 L833 274 L842 301 H836 L846 308 H819 L829 301 Z"/>
+  </g>
+
+  <!-- foreground terrain -->
+  <path d="M0 314 C110 294 205 326 315 314 C430 301 535 333 648 315 C770 296 870 326 985 310 C1070 298 1138 301 1200 306 L1200 360 L0 360 Z" fill="#0a0c12"/>
+
+  <!-- dense pine silhouettes left -->
+  <g fill="#0b0e16">
+    <path d="M45 312 L86 178 L127 312 H105 L137 342 H35 L67 312 Z"/>
+    <path d="M122 318 L157 205 L192 318 H172 L201 344 H113 L142 318 Z"/>
+    <path d="M208 315 L239 220 L270 315 H253 L277 338 H201 L225 315 Z"/>
+  </g>
+
+  <!-- dense pine silhouettes right -->
+  <g fill="#0b0e16">
+    <path d="M1000 314 L1042 172 L1084 314 H1060 L1092 342 H990 L1022 314 Z"/>
+    <path d="M1080 319 L1114 210 L1148 319 H1129 L1157 344 H1071 L1099 319 Z"/>
+    <path d="M1140 315 L1168 228 L1196 315 H1181 L1200 335 H1136 L1155 315 Z"/>
+  </g>
+
+  <!-- deer silhouette -->
+  <g fill="#0b0d13">
+    <ellipse cx="555" cy="304" rx="22" ry="12"/>
+    <rect x="539" y="305" width="7" height="30"/>
+    <rect x="563" y="305" width="7" height="30"/>
+    <path d="M572 294 L587 276 L598 279 L590 288 L598 294 Z"/>
+    <circle cx="591" cy="280" r="7"/>
+    <path d="M589 274 L584 262 M589 274 L595 262 M584 262 L580 257 M595 262 L600 257" stroke="#0b0d13" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <!-- subtle stars / particles -->
+  <g fill="#ffd7b0" opacity="0.55">
+    <rect x="255" y="64" width="3" height="3"/><rect x="515" y="56" width="3" height="3"/><rect x="620" y="72" width="3" height="3"/>
+    <rect x="1040" y="86" width="3" height="3"/><rect x="1120" y="58" width="3" height="3"/>
+  </g>
 
   <!-- title -->
   <g text-anchor="middle" font-family="'Courier New', monospace" font-weight="700">
-    <text x="600" y="130" font-size="48" fill="#FFF5EC" letter-spacing="5">HELLO WORLD</text>
-    <text x="600" y="194" font-size="44" fill="#FFB199" letter-spacing="6">I'M HAN!</text>
+    <text x="600" y="126" font-size="50" fill="#fff4e8" letter-spacing="6">HELLO WORLD</text>
+    <text x="600" y="191" font-size="45" fill="#ffb19b" letter-spacing="7">I'M HAN!</text>
   </g>
 
-  <text x="600" y="334" text-anchor="middle" font-family="'Courier New', monospace" font-size="14" fill="#C6B7C9" letter-spacing="4">GAME SYSTEMS • BACKEND • UNITY • C# • LUA</text>
+  <!-- bottom line -->
+  <text x="600" y="338" text-anchor="middle" font-family="'Courier New', monospace" font-size="13" fill="#c8b8c8" letter-spacing="4">GAME SYSTEMS • BACKEND • UNITY • C# • LUA</text>
 </svg>
