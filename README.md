@@ -14,3 +14,11 @@
 ![Redis](https://img.shields.io/badge/Redis-111318?style=for-the-badge&logo=redis&logoColor=E66A78)
 
 </div>
+
+<br/>
+
+<div align="center">
+
+<img src="./assets/contribution-heatmap.svg" width="100%" alt="Aurezhan contribution heatmap" />
+
+</div>
