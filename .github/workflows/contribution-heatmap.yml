@@ -1,32 +1,24 @@
-name: Generate contribution heatmap
+name: Update contribution heatmap
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: "17 0 * * *"
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - "assets/contribution-heatmap.svg"
+    - cron: "0 * * * *"
 
 permissions:
   contents: write
 
 jobs:
-  heatmap:
+  update:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Generate heatmap
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Update heatmap
         run: python scripts/generate_heatmap.py
 
-      - name: Commit generated SVG
+      - name: Save changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
