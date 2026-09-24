@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="330" height="40" viewBox="0 0 330 40">
+  <defs>
+    <filter id="glow" x="-20%" y="-30%" width="140%" height="160%">
+      <feGaussianBlur stdDeviation="1.4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <style>
+    .base {
+      font: 700 24px "Trebuchet MS", Verdana, sans-serif;
+      fill: #f0f6fc;
+    }
+
+    .ice {
+      font: 700 24px "Trebuchet MS", Verdana, sans-serif;
+      fill: #f0f6fc;
+      animation: freeze 2.6s ease-in-out infinite;
+    }
+
+    .i1 { animation-delay: 0s; }
+    .i2 { animation-delay: .12s; }
+    .i3 { animation-delay: .24s; }
+    .i4 { animation-delay: .36s; }
+    .i5 { animation-delay: .48s; }
+    .i6 { animation-delay: .60s; }
+    .i7 { animation-delay: .72s; }
+    .i8 { animation-delay: .84s; }
+
+    @keyframes freeze {
+      0%, 12%, 72%, 100% {
+        fill: #f0f6fc;
+        filter: none;
+      }
+      30% {
+        fill: #dffaff;
+        filter: url(#glow);
+      }
+      45% {
+        fill: #9beeff;
+        filter: url(#glow);
+      }
+      58% {
+        fill: #55cfff;
+        filter: url(#glow);
+      }
+    }
+  </style>
+
+  <text x="0" y="29" class="base">Hello World,</text>
+
+  <text x="150" y="29">
+    <tspan class="ice i1">I</tspan>
+    <tspan class="ice i2">'</tspan>
+    <tspan class="ice i3">m</tspan>
+    <tspan dx="8" class="ice i4">H</tspan>
+    <tspan class="ice i5">a</tspan>
+    <tspan class="ice i6">n</tspan>
+    <tspan class="ice i7">!</tspan>
+  </text>
+</svg>
