@@ -19,6 +19,6 @@
 
 <div align="center">
 
-<img src="./assets/contribution-heatmap.svg" width="100%" alt="Aurezhan contribution heatmap" />
+<img src="https://raw.githubusercontent.com/Aurezhan/Aurezhan/main/assets/contribution-heatmap.svg" width="100%" alt="Aurezhan contribution heatmap" />
 
 </div>
