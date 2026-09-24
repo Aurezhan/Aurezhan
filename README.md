@@ -4,10 +4,6 @@
 
 </div>
 
----
-
-### Tech Stack
-
 <div align="center">
 
 ![C#](https://img.shields.io/badge/C%23-111318?style=for-the-badge&logo=csharp&logoColor=E66A78)
