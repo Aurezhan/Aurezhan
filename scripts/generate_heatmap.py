@@ -1,139 +1,161 @@
 #!/usr/bin/env python3
-import json
+import html
 import os
+import re
 import urllib.request
 from datetime import datetime, timezone
 
 USERNAME = "Aurezhan"
-TOKEN = os.environ["GITHUB_TOKEN"]
 YEAR = datetime.now(timezone.utc).year
-FROM = f"{YEAR}-01-01T00:00:00Z"
-TO = f"{YEAR}-12-31T23:59:59Z"
 
-query = """
-query($login:String!, $from:DateTime!, $to:DateTime!) {
-  user(login:$login) {
-    contributionsCollection(from:$from, to:$to) {
-      contributionCalendar {
-        totalContributions
-        weeks {
-          contributionDays {
-            contributionCount
-            date
-            weekday
-          }
-        }
-      }
-    }
-  }
-}
-"""
-
-payload = json.dumps({
-    "query": query,
-    "variables": {"login": USERNAME, "from": FROM, "to": TO},
-}).encode()
+url = (
+    f"https://github.com/users/{USERNAME}/contributions"
+    f"?from={YEAR}-01-01&to={YEAR}-12-31"
+)
 
 req = urllib.request.Request(
-    "https://api.github.com/graphql",
-    data=payload,
+    url,
     headers={
-        "Authorization": f"Bearer {TOKEN}",
-        "Content-Type": "application/json",
-        "User-Agent": "Aurezhan-profile-heatmap",
+        "User-Agent": "Mozilla/5.0 Aurezhan-profile-heatmap",
+        "Accept": "text/html,application/xhtml+xml",
     },
 )
 
 with urllib.request.urlopen(req) as response:
-    result = json.loads(response.read().decode())
+    page = response.read().decode("utf-8", errors="replace")
 
-if "errors" in result:
-    raise RuntimeError(result["errors"])
-
-calendar = result["data"]["user"]["contributionsCollection"]["contributionCalendar"]
-weeks = calendar["weeks"]
-total = calendar["totalContributions"]
-
-counts = sorted(
-    day["contributionCount"]
-    for week in weeks
-    for day in week["contributionDays"]
-    if day["contributionCount"] > 0
+# GitHub's public contribution page exposes one cell per day.
+# We only need date + intensity level (0..4), which avoids requiring a PAT.
+cells = re.findall(
+    r'<td[^>]*?data-date="(\d{4}-\d{2}-\d{2})"[^>]*?data-level="([0-4])"[^>]*?>',
+    page,
 )
 
-def percentile(values, p):
-    if not values:
-        return 1
-    i = min(len(values) - 1, max(0, int((len(values) - 1) * p)))
-    return values[i]
+# GitHub has changed attribute ordering before, so support the reverse order too.
+if not cells:
+    reverse = re.findall(
+        r'<td[^>]*?data-level="([0-4])"[^>]*?data-date="(\d{4}-\d{2}-\d{2})"[^>]*?>',
+        page,
+    )
+    cells = [(date, level) for level, date in reverse]
 
-q1 = percentile(counts, 0.25)
-q2 = percentile(counts, 0.50)
-q3 = percentile(counts, 0.75)
+if not cells:
+    raise RuntimeError("Could not parse GitHub contribution calendar.")
 
-def color(count):
-    if count == 0:
-        return "#161018"
-    if count <= q1:
-        return "#43131d"
-    if count <= q2:
-        return "#741827"
-    if count <= q3:
-        return "#b62139"
-    return "#ff3b5c"
+# Try to capture the public total shown by GitHub.
+total_match = re.search(
+    r'([\d,]+)\s+contributions?\s+in\s+' + str(YEAR),
+    html.unescape(page),
+    re.IGNORECASE,
+)
+total_text = total_match.group(1) if total_match else None
+
+days = {}
+for date_str, level in cells:
+    dt = datetime.strptime(date_str, "%Y-%m-%d")
+    if dt.year == YEAR:
+        days[date_str] = int(level)
+
+# Build Sunday-based calendar columns like GitHub.
+jan1 = datetime(YEAR, 1, 1)
+dec31 = datetime(YEAR, 12, 31)
+
+# Python Monday=0..Sunday=6 -> Sunday=0..Saturday=6
+def sunday_index(dt):
+    return (dt.weekday() + 1) % 7
+
+start = jan1
+while sunday_index(start) != 0:
+    from datetime import timedelta
+    start -= timedelta(days=1)
+
+from datetime import timedelta
+end = dec31
+while sunday_index(end) != 6:
+    end += timedelta(days=1)
+
+weeks = []
+cursor = start
+while cursor <= end:
+    week = []
+    for _ in range(7):
+        date_str = cursor.strftime("%Y-%m-%d")
+        week.append((cursor, days.get(date_str, 0) if cursor.year == YEAR else None))
+        cursor += timedelta(days=1)
+    weeks.append(week)
+
+colors = {
+    0: "#161018",
+    1: "#43131d",
+    2: "#741827",
+    3: "#b62139",
+    4: "#ff3b5c",
+}
 
 cell = 14
 gap = 4
 step = cell + gap
-left = 46
-top = 42
-width = max(1040, left + len(weeks) * step + 18)
-height = 196
+left = 48
+top = 46
+width = max(1040, left + len(weeks) * step + 20)
+height = 202
 
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="{width}" height="{height}">',
     '<style>text{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif}</style>',
-    f'<text x="0" y="16" fill="#c9d1d9" font-size="14" font-weight="600">{total} contributions in {YEAR}</text>',
 ]
+
+if total_text:
+    parts.append(
+        f'<text x="0" y="16" fill="#c9d1d9" font-size="14" font-weight="600">'
+        f'{total_text} contributions in {YEAR}</text>'
+    )
+else:
+    parts.append(
+        f'<text x="0" y="16" fill="#c9d1d9" font-size="14" font-weight="600">'
+        f'Contributions in {YEAR}</text>'
+    )
 
 # Month labels
 last_month = None
 for wi, week in enumerate(weeks):
-    if not week["contributionDays"]:
+    visible = [dt for dt, level in week if dt.year == YEAR]
+    if not visible:
         continue
-    first = week["contributionDays"][0]
-    dt = datetime.strptime(first["date"], "%Y-%m-%d")
-    month = dt.strftime("%b")
+    dt = visible[0]
     if dt.month != last_month and dt.day <= 7:
-        x = left + wi * step
-        parts.append(f'<text x="{x}" y="35" fill="#8b949e" font-size="11">{month}</text>')
+        parts.append(
+            f'<text x="{left + wi * step}" y="37" fill="#8b949e" font-size="11">'
+            f'{dt.strftime("%b")}</text>'
+        )
         last_month = dt.month
 
-# Weekday labels
 for label, row in (("Mon", 1), ("Wed", 3), ("Fri", 5)):
-    y = top + row * step + 11
-    parts.append(f'<text x="0" y="{y}" fill="#8b949e" font-size="10">{label}</text>')
+    parts.append(
+        f'<text x="0" y="{top + row * step + 11}" fill="#8b949e" font-size="10">{label}</text>'
+    )
 
 for wi, week in enumerate(weeks):
-    for day in week["contributionDays"]:
+    for row, (dt, level) in enumerate(week):
+        if level is None:
+            continue
         x = left + wi * step
-        y = top + day["weekday"] * step
-        c = day["contributionCount"]
+        y = top + row * step
+        date_str = dt.strftime("%Y-%m-%d")
         parts.append(
             f'<rect x="{x}" y="{y}" width="{cell}" height="{cell}" rx="3" '
-            f'fill="{color(c)}"><title>{day["date"]}: {c} contributions</title></rect>'
+            f'fill="{colors[level]}"><title>{date_str} · level {level}</title></rect>'
         )
 
-# Legend
-legend_x = width - 178
-legend_y = height - 24
+legend_x = width - 172
+legend_y = height - 23
 parts.append(f'<text x="{legend_x}" y="{legend_y+10}" fill="#8b949e" font-size="10">Less</text>')
-legend_colors = ["#161018", "#43131d", "#741827", "#b62139", "#ff3b5c"]
-for i, c in enumerate(legend_colors):
+for i in range(5):
     parts.append(
-        f'<rect x="{legend_x + 34 + i * 17}" y="{legend_y}" width="12" height="12" rx="3" fill="{c}"/>'
+        f'<rect x="{legend_x + 34 + i * 17}" y="{legend_y}" width="12" height="12" '
+        f'rx="3" fill="{colors[i]}"/>'
     )
-parts.append(f'<text x="{legend_x + 124}" y="{legend_y+10}" fill="#8b949e" font-size="10">More</text>')
+parts.append(f'<text x="{legend_x + 123}" y="{legend_y+10}" fill="#8b949e" font-size="10">More</text>')
 parts.append("</svg>")
 
 os.makedirs("assets", exist_ok=True)
