@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="210" height="34" viewBox="0 0 210 34">
+  <defs>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="1.8" result="b" />
+      <feMerge>
+        <feMergeNode in="b" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <style>
+    .letter {
+      font: 700 26px "Trebuchet MS", Verdana, sans-serif;
+      fill: #f3f6fb;
+      animation: ice 2.2s infinite;
+    }
+
+    .l1 { animation-delay: 0s; }
+    .l2 { animation-delay: 0.12s; }
+    .l3 { animation-delay: 0.24s; }
+    .l5 { animation-delay: 0.48s; }
+    .l6 { animation-delay: 0.60s; }
+    .l7 { animation-delay: 0.72s; }
+    .l8 { animation-delay: 0.84s; }
+
+    @keyframes ice {
+      0%, 100% { fill: #f3f6fb; }
+      20% { fill: #e8fbff; }
+      35% { fill: #9eeeff; }
+      50% { fill: #66d9ff; }
+      65% { fill: #e8fbff; }
+      80% { fill: #f3f6fb; }
+    }
+  </style>
+
+  <text x="0" y="25" filter="url(#glow)">
+    <tspan class="letter l1">I</tspan>
+    <tspan class="letter l2">'</tspan>
+    <tspan class="letter l3">m</tspan>
+    <tspan dx="10" class="letter l5">H</tspan>
+    <tspan class="letter l6">a</tspan>
+    <tspan class="letter l7">n</tspan>
+    <tspan class="letter l8">!</tspan>
+  </text>
+</svg>
